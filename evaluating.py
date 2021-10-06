@@ -19,7 +19,8 @@ def sample(preds, temperature):
 	preds = exp_preds / numpy.sum(exp_preds)
 	#print (numpy.sum(preds))
 	#print (preds)
-	probas = numpy.random.multinomial(1, preds.flatten(), size=1)
+	#probas = numpy.random.multinomial(1, preds.flatten(), size=1)
+	probas = numpy.random.multinomial(100, preds.flatten(), size=1)
 	#print (probas)
 	#print (probas[0])
 	return probas[0]
@@ -59,7 +60,7 @@ for smax in [0.01,0.02,0.05,0.1]:
 		#model 2
 		# x_s = numpy.reshape([5,5,5,5,5], (1,len(pattern),1))
 		#model 3
-		x_s = numpy.reshape([4], (1,1,1))
+		x_s = numpy.reshape([3], (1,1,1))
 		x = x / float(m.n_vocab)
 		prediction = model.predict([x_s,x], verbose=0)
 		index = numpy.argmax(sample(prediction,smax))

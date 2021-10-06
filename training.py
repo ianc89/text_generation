@@ -91,6 +91,6 @@ callbacks_list = [checkpoint]
 # Model 2
 #model.fit([X_s2, X], y, epochs=5, batch_size=128, callbacks=callbacks_list)
 # Model 3
-model.fit([X_s, X], y, epochs=5, batch_size=256, callbacks=callbacks_list)
+model.fit([X_s, X], y, epochs=10, batch_size=256, callbacks=callbacks_list)
 
 
