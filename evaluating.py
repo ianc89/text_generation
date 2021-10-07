@@ -8,7 +8,7 @@ m = Mapping()
 m.load()
 
 mo = ModelClass()
-mo.load_model_3(filename)
+mo.load_model_4(filename)
 model = mo.model
 
 # This function allows us to manipulate the probabilities to add some creativity
@@ -43,7 +43,7 @@ for i in range(100):
 	#model 3
 	x_s = numpy.reshape([4], (1,1,1))
 	x = x / float(m.n_vocab)
-	prediction = model.predict([x_s,x], verbose=0)
+	prediction = model.predict(x, verbose=0)
 	index = numpy.argmax(prediction)
 	result = m.int_to_chars[index]
 	seq_in = [m.int_to_chars[value] for value in pattern]
@@ -52,8 +52,10 @@ for i in range(100):
 	pattern = pattern[1:len(pattern)]
 print ("\nDone.")
 
-for smax in [0.01,0.02,0.05,0.1]:
-	for i in range(500):
+for smax in [0.01,0.02,0.03,0.04,0.05,0.1]:
+	pattern = [m.chars_to_int[x] for x in seed]
+	pattern = pattern[:m.seq_length]
+	for i in range(200):
 		x = numpy.reshape(pattern, (1, len(pattern), 1))
 		#model 1
 		# x_s = numpy.reshape([5], (1,1,1))
@@ -62,7 +64,7 @@ for smax in [0.01,0.02,0.05,0.1]:
 		#model 3
 		x_s = numpy.reshape([3], (1,1,1))
 		x = x / float(m.n_vocab)
-		prediction = model.predict([x_s,x], verbose=0)
+		prediction = model.predict(x, verbose=0)
 		index = numpy.argmax(sample(prediction,smax))
 		result = m.int_to_chars[index]
 		seq_in = [m.int_to_chars[value] for value in pattern]

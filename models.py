@@ -74,9 +74,8 @@ class ModelClass:
 
 	def set_model_4(self,X,y):
 		input1 = Input(shape=(X.shape[1],X.shape[2]))
-		lstm1  = LSTM(512)(input1)#512
-		drop1  = Dropout(0.1)(lstm1)
-		lstm2  = LSTM(100)(drop1)
+		lstm1  = LSTM(512, return_sequences=True)(input1)#512
+		lstm2  = LSTM(128)(lstm1)
 		output = Dense(y.shape[1], activation='softmax')(lstm2)
 		model  = Model(inputs=input1, outputs=output)
 		model.compile(loss='categorical_crossentropy', optimizer='adam')
@@ -97,9 +96,8 @@ class ModelClass:
 		y1 = int(y1)
 
 		input1 = Input(shape=(X1,X2))
-		lstm1  = LSTM(512)(input1)#512
-		drop1  = Dropout(0.1)(lstm1)
-		lstm2  = LSTM(100)(drop1)
+		lstm1  = LSTM(512, return_sequences=True)(input1)#512
+		lstm2  = LSTM(128)(lstm1)
 		output = Dense(y1, activation='softmax')(lstm2)
 		model  = Model(inputs=input1, outputs=output)
 		model.load_weights(weights)
